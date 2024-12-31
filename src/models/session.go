@@ -8,7 +8,6 @@ import (
 type Session struct {
 	ID           uint      `gorm:"primaryKey"`
 	UserID       uint      `gorm:"not null"`
-	User         User      `gorm:"foreignKey:UserID"`
 	Status       string    `gorm:"default:active"` // active, inactive, terminated
 	ContainerID  string    `gorm:"not null"`
 	IPAddress    string    `gorm:"not null"`

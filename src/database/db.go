@@ -6,7 +6,6 @@ import (
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"let-me-in/models"
 )
 
 var DB *gorm.DB
@@ -18,12 +17,6 @@ func ConnectDatabase() {
 		log.Fatal("Failed to connect to database:", err)
 	}
 
-	// AutoMigrate models
-	err = DB.AutoMigrate(&models.User{}, &models.Session{})
-	if err != nil {
-		log.Fatal("Failed to migrate database:", err)
-	}
-
-	fmt.Println("Database connected and migrated")
+	fmt.Println("Database connected")
 }
 

@@ -1,4 +1,4 @@
-package models
+package auth 
 
 import (
 	"time"
@@ -11,4 +11,5 @@ type User struct {
 	Password  string    `gorm:"not null"`
 	CreatedAt time.Time
 }
+
 

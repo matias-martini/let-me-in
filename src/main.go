@@ -2,6 +2,7 @@ package main
 
 import (
 	"let-me-in/controllers"
+    "let-me-in/modules/auth"
 	"let-me-in/database"
 
 	"github.com/gin-gonic/gin"
@@ -14,8 +15,8 @@ func main() {
 	router := gin.Default()
 
 	// User routes
-	router.POST("/users/register", controllers.RegisterUser)
-	router.POST("/auth/login", controllers.Login)
+	router.POST("/users/register", auth.RegisterUser)
+	router.POST("/auth/login", auth.Login)
 
 	// Session routes
 	router.POST("/sessions/start", controllers.StartSession)

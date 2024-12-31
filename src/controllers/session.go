@@ -5,8 +5,8 @@ import (
 	"time"
 	"let-me-in/database"
 	"let-me-in/terminal"
-	"let-me-in/models"
-	"let-me-in/utils"
+	"let-me-in/modules/auth"
+    "let-me-in/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -26,7 +26,7 @@ func StartSession(c *gin.Context) {
 	}
 
 	// Check if the user exists
-	var user models.User
+	var user auth.User
 	if err := database.DB.First(&user, input.UserID).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found"})
 		return
@@ -69,7 +69,7 @@ var upgrader = websocket.Upgrader{
 func TerminalWebSocket(c *gin.Context) {
 	token := c.Query("token") // Get token from query parameter
 
-	_, err := utils.ValidateJWT(token)
+	_, err := auth.ValidateJWT(token)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
 		return
