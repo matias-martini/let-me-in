@@ -36,8 +36,9 @@ func startServer() {
     router := gin.Default()
 
     // User routes
-    router.POST("/users/register", auth.RegisterUser)
-    router.POST("/auth/login", auth.Login)
+    router.POST("/auth/register", auth.RegisterUserHandler)
+    router.POST("/auth/login", auth.LoginUserHandler)
+    router.POST("/auth/refresh", auth.RefreshTokenHandler)
 
     // Session routes
     router.POST("/sessions/start", controllers.StartSession)

@@ -1,15 +1,27 @@
-package auth 
+package auth
 
 import (
-	"time"
+	"gorm.io/gorm"
 )
 
-// User represents a user in the system.
-type User struct {
-	ID        uint      `gorm:"primaryKey"`
-	Username  string    `gorm:"unique;not null"`
-	Password  string    `gorm:"not null"`
-	CreatedAt time.Time
+type UserCredentials struct {
+	gorm.Model
+	Email    string `gorm:"uniqueIndex"`
+	Password string
+	Salt     string
+	UserID   uint
 }
 
+type User struct {
+	gorm.Model
+	DisplayName string
+}
 
+type RefreshToken struct {
+	gorm.Model
+	Token     string `gorm:"uniqueIndex"`
+	UserID    uint
+	User      User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE,foreignKey:UserID;"`
+	ExpiresAt int64
+	Active    bool
+}

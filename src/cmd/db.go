@@ -1,4 +1,3 @@
-
 package cmd
 
 import (
@@ -40,7 +39,7 @@ func migrateModels() {
     fmt.Println("Running migrations...")
     database.ConnectDatabase()
 
-    if err := database.DB.AutoMigrate(&auth.User{}); err != nil {
+    if err := database.DB.AutoMigrate(&auth.User{}, &auth.UserCredentials{}, &auth.RefreshToken{}); err != nil {
         fmt.Printf("Error migrating User model: %v\n", err)
         return
     }
