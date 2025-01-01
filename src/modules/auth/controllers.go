@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"regexp"
     "time"
+    "net/mail"
 
 	"let-me-in/database"
 
@@ -14,9 +15,9 @@ import (
 // RegisterUserHandler handles user registration with salt and pepper for password security
 func RegisterUserHandler(c *gin.Context) {
 	var input struct {
-		DisplayName string `json:"display_name"`
-		Email       string `json:"email"`
-		Password    string `json:"password"`
+		DisplayName string `json:"display_name" binding:"required"`
+		Email       string `json:"email" binding:"required"`
+		Password    string `json:"password" binding:"required"`
 	}
 
 	db := database.DB
@@ -36,6 +37,13 @@ func RegisterUserHandler(c *gin.Context) {
 	// Validate email format
 	emailRegex := regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
 	if !emailRegex.MatchString(input.Email) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid email format"})
+		return
+	}
+
+	// Check if email is valid using mail.ParseAddress
+	_, err := mail.ParseAddress(input.Email)
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid email format"})
 		return
 	}
@@ -98,8 +106,8 @@ func RegisterUserHandler(c *gin.Context) {
 
 func LoginUserHandler(c *gin.Context) {
 	var input struct {
-		Email    string `json:"email"`
-		Password string `json:"password"`
+		Email    string `json:"email" binding:"required"`
+		Password string `json:"password" binding:"required"`
 	}
 
 	db := database.DB
@@ -118,13 +126,6 @@ func LoginUserHandler(c *gin.Context) {
 		} else {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to query user credentials: " + err.Error()})
 		}
-		return
-	}
-
-	// Hash the provided password for comparison
-	_, err := hashPassword(input.Password, userCredentials.Salt)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Authentication error"})
 		return
 	}
 
@@ -148,7 +149,7 @@ func LoginUserHandler(c *gin.Context) {
 		return
 	}
 
-	expiresAt := time.Now().Add(7 * 24 * time.Hour).Unix() // 7 days expiration
+	expiresAt := time.Now().Add(1 * 24 * time.Hour).Unix() // 1 day expiration
 
 	// Store Refresh Token
 	refreshTokenModel := RefreshToken{
@@ -172,7 +173,7 @@ func LoginUserHandler(c *gin.Context) {
 // RefreshTokenHandler handles refreshing access and ID tokens using a valid refresh token
 func RefreshTokenHandler(c *gin.Context) {
 	var input struct {
-		RefreshToken string `json:"refresh_token"`
+		RefreshToken string `json:"refresh_token" binding:"required"`
 	}
 
 	db := database.DB
