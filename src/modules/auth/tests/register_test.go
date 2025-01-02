@@ -8,6 +8,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
+    "let-me-in/modules/auth"
+
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )
@@ -16,7 +18,7 @@ func TestRegisterUserHandlerSuccess(t *testing.T) {
 	// Set up the test environment
 	database.InitTestDB()
 	router := gin.Default()
-    RegisterAuthRoutes(router.Group("/auth"))
+    auth.RegisterAuthRoutes(router.Group("/auth"))
 
 	// Create a test request body
 	requestBody := map[string]string{
@@ -47,7 +49,7 @@ func TestRegisterUserHandlerSuccess(t *testing.T) {
 func TestRegisterUserHandlerShortPassword(t *testing.T) {
 	database.InitTestDB()
 	router := gin.Default()
-	RegisterAuthRoutes(router.Group("/auth"))
+	auth.RegisterAuthRoutes(router.Group("/auth"))
 
 	requestBody := map[string]string{
 		"display_name": "testuser",
@@ -76,7 +78,7 @@ func TestRegisterUserHandlerShortPassword(t *testing.T) {
 func TestRegisterUserHandlerInvalidEmail(t *testing.T) {
 	database.InitTestDB()
 	router := gin.Default()
-	RegisterAuthRoutes(router.Group("/auth"))
+	auth.RegisterAuthRoutes(router.Group("/auth"))
 
 	requestBody := map[string]string{
 		"display_name": "tito_pruebas",
@@ -101,7 +103,7 @@ func TestRegisterUserHandlerInvalidEmail(t *testing.T) {
 func TestRegisterUserHandlerEmptyDisplayName(t *testing.T) {
 	database.InitTestDB()
 	router := gin.Default()
-	RegisterAuthRoutes(router.Group("/auth"))
+	auth.RegisterAuthRoutes(router.Group("/auth"))
 
 	requestBody := map[string]string{
 		"display_name": "",
@@ -129,7 +131,7 @@ func TestRegisterUserHandlerEmptyDisplayName(t *testing.T) {
 func TestRegisterUserHandlerDuplicateEmail(t *testing.T) {
 	database.InitTestDB()
 	router := gin.Default()
-	RegisterAuthRoutes(router.Group("/auth"))
+	auth.RegisterAuthRoutes(router.Group("/auth"))
 
 	// First registration
 	requestBody := map[string]string{
@@ -166,7 +168,7 @@ func TestRegisterUserHandlerDuplicateEmail(t *testing.T) {
 func TestRegisterUserHandlerMissingData(t *testing.T) {
 	database.InitTestDB()
 	router := gin.Default()
-	RegisterAuthRoutes(router.Group("/auth"))
+	auth.RegisterAuthRoutes(router.Group("/auth"))
 
 	testCases := []struct {
 		name         string
