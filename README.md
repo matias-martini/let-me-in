@@ -12,6 +12,30 @@ The project aims to provide **on-demand, ephemeral terminal sessions** that can 
 
 ---
 
+## 🚀 **Quick Start**
+
+### Prerequisites
+- [Docker](https://www.docker.com/)
+- Make
+  - [Windows (GnuWin32)](http://gnuwin32.sourceforge.net/packages/make.htm)
+  - [Linux](https://www.gnu.org/software/make/)
+  - [macOS (via Homebrew)](https://formulae.brew.sh/formula/make)
+
+### Running the Project
+
+1. Run database migrations:
+```bash
+make migrate
+```
+
+2. Start the application stack:
+```bash
+make up
+```
+
+The application will be available at `http://localhost:8080`
+
+---
 ## 🎯 **Core Goals for MVP**
 
 1. **Authentication:**  
