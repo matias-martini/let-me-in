@@ -61,10 +61,10 @@ The project aims to provide **on-demand, ephemeral terminal sessions** that can 
 ## 🛤️ **Milestones**
 
 ### 🚀 **Milestone 1: Minimal Authentication Mechanism**
-- [ ] Implement a **JWT-based authentication system**.
-- [ ] Provide **login and token issuance** endpoints.
+- [x] Implement a **JWT-based authentication system**.
+- [x] Provide **login and token issuance** endpoints.
 - [ ] Protect API routes using **middleware for JWT validation**.
-- [ ] Store user credentials securely (hashed passwords).
+- [x] Store user credentials securely (hashed passwords with salt and pepper).
 - [ ] Create basic session management (e.g., token expiration and refresh).
 
 **✅ Deliverables:**  
