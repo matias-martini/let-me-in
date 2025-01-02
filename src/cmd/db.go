@@ -34,8 +34,9 @@ func init() {
     rootCmd.AddCommand(dbCmd)
     dbCmd.AddCommand(dbMigrateCmd)
 }
-
 func migrateModels() {
+    fmt.Println("Creating database if not exists...")
+    database.CreateDBIfNotExists()
     fmt.Println("Running migrations...")
     database.Init()
 
