@@ -15,16 +15,32 @@ import (
 // RegisterUserHandler handles user registration with salt and pepper for password security
 func RegisterUserHandler(c *gin.Context) {
 	var input struct {
-		DisplayName string `json:"display_name" binding:"required"`
-		Email       string `json:"email" binding:"required"`
-		Password    string `json:"password" binding:"required"`
+		DisplayName string `json:"display_name"`
+		Email       string `json:"email"`
+		Password    string `json:"password"`
 	}
 
 	db := database.DB
 
 	// Validate request payload
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request payload"})
+		return
+	}
+
+	// Validate required fields with specific messages
+	if input.DisplayName == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Display name cannot be empty"})
+		return
+	}
+
+	if input.Email == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid email format"})
+		return
+	}
+
+	if input.Password == "" || len(input.Password) < 8 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Password must be at least 8 characters long"})
 		return
 	}
 
