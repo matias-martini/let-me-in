@@ -53,4 +53,3 @@ func StartTerminalSession(conn *websocket.Conn, command string) {
 		}
 	}
 }
-

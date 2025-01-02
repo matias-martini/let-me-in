@@ -14,4 +14,3 @@ type Session struct {
 	LastActivity time.Time `gorm:"autoUpdateTime"`
 	CreatedAt    time.Time
 }
-

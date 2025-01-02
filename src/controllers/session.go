@@ -1,12 +1,12 @@
 package controllers
 
 import (
+	"let-me-in/database"
+	"let-me-in/models"
+	"let-me-in/modules/auth"
+	"let-me-in/terminal"
 	"net/http"
 	"time"
-	"let-me-in/database"
-	"let-me-in/terminal"
-	"let-me-in/modules/auth"
-    "let-me-in/models"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"

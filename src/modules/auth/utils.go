@@ -1,13 +1,13 @@
-package auth 
+package auth
 
 import (
-	"errors"
-	"time"
 	"crypto/rand"
 	"encoding/base64"
+	"errors"
+	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 	"os"
-	"github.com/golang-jwt/jwt/v5"
+	"time"
 )
 
 // Secret key (use environment variables in production)

@@ -1,10 +1,10 @@
-package auth 
+package auth
 
 import (
 	"net/http"
+	"net/mail"
 	"regexp"
-    "time"
-    "net/mail"
+	"time"
 
 	"let-me-in/database"
 
@@ -118,7 +118,6 @@ func RegisterUserHandler(c *gin.Context) {
 		"user": user,
 	})
 }
-
 
 func LoginUserHandler(c *gin.Context) {
 	var input struct {
@@ -260,4 +259,3 @@ func RefreshTokenHandler(c *gin.Context) {
 		"refresh_token": newRefreshToken,
 	})
 }
-

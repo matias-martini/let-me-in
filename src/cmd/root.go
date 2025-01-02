@@ -11,7 +11,7 @@ import (
 // It doesn’t do anything by itself, but it can hold persistent flags,
 // global config, etc.
 var rootCmd = &cobra.Command{
-	Use:   "let-me-in", 
+	Use:   "let-me-in",
 	Short: "A secure and user-friendly terminal access management service.",
 	Long: `Let Me In is a robust service designed to provide secure and persistent access 
 to terminal sessions through a web interface. 
@@ -28,4 +28,3 @@ func Execute() {
 		os.Exit(1)
 	}
 }
-

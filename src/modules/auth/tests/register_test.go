@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-    "let-me-in/modules/auth"
+	"let-me-in/modules/auth"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
@@ -18,7 +18,7 @@ func TestRegisterUserHandlerSuccess(t *testing.T) {
 	// Set up the test environment
 	database.InitTestDB()
 	router := gin.Default()
-    auth.RegisterAuthRoutes(router.Group("/auth"))
+	auth.RegisterAuthRoutes(router.Group("/auth"))
 
 	// Create a test request body
 	requestBody := map[string]string{

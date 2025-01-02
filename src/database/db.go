@@ -96,4 +96,3 @@ func InitTestDB() {
 func ResetTestDB() {
 	DB.Rollback()
 }
-

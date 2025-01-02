@@ -1,9 +1,9 @@
 package main
 
 import (
-    "let-me-in/cmd"
+	"let-me-in/cmd"
 )
 
 func main() {
-    cmd.Execute()
+	cmd.Execute()
 }
