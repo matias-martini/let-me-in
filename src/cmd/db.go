@@ -37,7 +37,7 @@ func init() {
 
 func migrateModels() {
     fmt.Println("Running migrations...")
-    database.ConnectDatabase()
+    database.Init()
 
     if err := database.DB.AutoMigrate(&auth.User{}, &auth.UserCredentials{}, &auth.RefreshToken{}); err != nil {
         fmt.Printf("Error migrating User model: %v\n", err)

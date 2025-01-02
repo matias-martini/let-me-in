@@ -31,7 +31,7 @@ func init() {
 }
 
 func startServer() {
-    database.ConnectDatabase()
+    database.Init()
 
     router := gin.Default()
 
