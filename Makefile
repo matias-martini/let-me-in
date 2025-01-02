@@ -14,3 +14,5 @@ test: build
 test-db: build
 	docker compose run -e DB_NAME=test_db --rm backend go run main.go db migrate
  
+fmt:
+	docker compose run --rm backend go fmt ./...
