@@ -1,8 +1,11 @@
-build:
-	docker build . -t let-me-in
+build: Dockerfile src/go.mod 
+	docker compose build  
+	echo "" >> build
 
-up:
+up: build
 	docker compose up 
 
-migrate:
-	docker compose run backend go run main.go db migrate
+migrate: build
+	docker compose run --rm backend go run main.go db migrate
+
+ 
