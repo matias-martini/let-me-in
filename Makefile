@@ -2,4 +2,7 @@ build:
 	docker build . -t let-me-in
 
 up:
-	docker run -it --rm -p8080:8080 let-me-in
+	docker compose up 
+
+migrate:
+	docker compose run backend go run main.go db migrate
