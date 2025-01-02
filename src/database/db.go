@@ -87,3 +87,13 @@ func Init() {
 
 	DB = db
 }
+
+func InitTestDB() {
+	Init()
+	DB = DB.Begin()
+}
+
+func ResetTestDB() {
+	DB.Rollback()
+}
+
